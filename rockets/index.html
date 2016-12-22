@@ -2,12 +2,26 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>ROCKETS!</title>
+    <link href="https://fonts.googleapis.com/css?family=Wendy+One" rel="stylesheet">
     <script type="text/javascript" src="Pool.js"> </script>
     <script type="text/javascript" src="Rocket.js"> </script>
     <script type="text/javascript" src="Main.js"> </script>
+    <style type="text/css">
+        body{background-color:black; color:white;}
+        .wendy{font-family: 'Wendy One', sans-serif;}
+        canvas{display: block;}
+        p{width:100%;}
+        .container{width:800px;text-align: center;}
+    </style>
 </head>
-<body style="background-color:black;">
+<body>
+	<div class='container'>
+	    <h1 class='wendy'>ROCKETS!</h1>
+	    <canvas id='mainCanvas' width='800' height='600'></canvas>
+
+	    <p><span class='wendy'>ROCKETS!</span> is genetic algorythm example in which rockets are controlled by heriditary instructions.  Successful <span class='wendy'>ROCKETS!</span> are more likely to breed the next generation of <span class='wendy'>ROCKETS!</span></p>
+    </div>
     <script type="text/javascript">
         var main = new Main();
     </script>
