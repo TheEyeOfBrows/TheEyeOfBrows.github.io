@@ -29,6 +29,17 @@ function Main() {
             this.obstacles.push({ pos: new Vector2D(0, (this.canvas.height * 0.25) - 10), width: this.canvas.width * 0.75, height: 20 });
             this.obstacles.push({ pos: new Vector2D(this.canvas.width * 0.25, (this.canvas.height* 0.6) - 10), width: this.canvas.width * 0.75, height: 20 });
         }
+        if(this.obstacleSet == 2)
+        {
+            this.obstacles.push({ 
+                pos: new Vector2D(Math.random() * this.canvas.width, Math.random() * this.canvas.height * 0.6), 
+                width: (Math.random() * this.canvas.width * 0.5) + 40, 
+                height: (Math.random() * this.canvas.height * 0.25) + 30 });
+            this.obstacles.push({ 
+                pos: new Vector2D(Math.random() * this.canvas.width, Math.random() * this.canvas.height * 0.6), 
+                width: (Math.random() * this.canvas.width * 0.5) + 40, 
+                height: (Math.random() * this.canvas.height * 0.25) + 30 });
+        }
         this.runCount = 0;
         this.runMax = 300;
 
