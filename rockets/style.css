@@ -1,0 +1,24 @@
+body{background-color:black; color:white;}
+.wendy{font-family: 'Wendy One', sans-serif;}
+canvas{display: block;}
+p{width:100%;}
+.container{width:800px;text-align: center;}
+.controls{margin:5px 0; padding:0 5px; display: flex; justify-content: space-between;}
+
+.controls input{
+    background-color: black;
+    border: none;
+    outline: 1px solid white;
+    color: white;
+    margin:-1px;
+}
+.controls input:hover{
+	outline: 2px solid white;
+}
+.controls select{
+	background-color: black;
+	color:white;
+	border: 1px solid white;
+}
+.controls select:hover{outline: 1px solid white;}
+.controls select:focus{outline: none;}

@@ -105,7 +105,8 @@
     this.GetFitness = function(targetPos)
     {
         var fitness = this.hitTarget ? this.grading.hitTargetScale: 0;
-        if (this.hitTarget)
+
+        if (this.hitTarget && this.grading.hitTargetScale > 0)
         {
             fitness += mapRange(this.aliveTime, 0, 300, this.grading.aliveTimeScale, 0);
         }

@@ -2,6 +2,7 @@
 function Main() {
     this.canvas;
     this.context;
+    this.loopId;
 
     this.rockets = [];
     this.obstacles;
@@ -10,6 +11,8 @@ function Main() {
     this.runMax;
     this.pool;
     this.round;
+    this.isRunning = false;
+    this.obstacleSet = 0;
 
     this.fitnessGrading;
 
@@ -17,9 +20,15 @@ function Main() {
         this.target = { pos: new Vector2D((this.canvas.width / 2) - 25, 25), width: 25, height: 25 };
         this.fitnessGrading = new FitnessGrading(this.target.pos, 1, 3, 5);
         this.obstacles = [];
+        if(this.obstacleSet == 0)
+        {
         this.obstacles.push({ pos: new Vector2D((this.canvas.width / 2) - 150, (this.canvas.height / 2) - 10), width: 300, height: 20 });
-        //this.obstacles.push({ pos: new Vector2D(0, (this.canvas.height * 0.25) - 10), width: this.canvas.width * 0.75, height: 20 });
-        //this.obstacles.push({ pos: new Vector2D(this.canvas.width * 0.25, (this.canvas.height* 0.6) - 10), width: this.canvas.width * 0.75, height: 20 });
+        }
+        if(this.obstacleSet == 1)
+        {
+            this.obstacles.push({ pos: new Vector2D(0, (this.canvas.height * 0.25) - 10), width: this.canvas.width * 0.75, height: 20 });
+            this.obstacles.push({ pos: new Vector2D(this.canvas.width * 0.25, (this.canvas.height* 0.6) - 10), width: this.canvas.width * 0.75, height: 20 });
+        }
         this.runCount = 0;
         this.runMax = 300;
 
@@ -91,9 +100,26 @@ function Main() {
         this.context = this.canvas.getContext("2d");
     }
 
-    this.InitCanvas();
-    this.Setup();
-    setInterval(this.Update.bind(this), 1000 / 60);
+    this.Run = function()
+    {
+        this.InitCanvas();
+        this.Setup();
+        this.RunToggle();
+    }
+    this.RunToggle = function()
+    {
+        if(this.isRunning)
+        {
+            clearInterval(this.loopId);
+            this.isRunning = false;
+        }
+        else
+        {
+            this.loopId = setInterval(this.Update.bind(this), 1000 / 60);
+            this.isRunning = true;
+        }
+    }
+
 }
 
 //var main = new Main();

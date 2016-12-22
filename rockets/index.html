@@ -4,26 +4,53 @@
     <meta charset="utf-8" />
     <title>ROCKETS!</title>
     <link href="https://fonts.googleapis.com/css?family=Wendy+One" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <script type="text/javascript" src="Pool.js"> </script>
     <script type="text/javascript" src="Rocket.js"> </script>
     <script type="text/javascript" src="Main.js"> </script>
-    <style type="text/css">
-        body{background-color:black; color:white;}
-        .wendy{font-family: 'Wendy One', sans-serif;}
-        canvas{display: block;}
-        p{width:100%;}
-        .container{width:800px;text-align: center;}
-    </style>
+    <script type="text/javascript" src="Controls.js"> </script>
 </head>
 <body>
 	<div class='container'>
 	    <h1 class='wendy'>ROCKETS!</h1>
 	    <canvas id='mainCanvas' width='800' height='600'></canvas>
-
+		<div class='controls'>
+			<input type='button' value='Pause' onclick='Rockets_Pause();'/>
+			<span>Time Alive Grading: <select onchange="Rockets_SetFitness_AliveTimeScale(this);">
+					<option value='0'>0</option>
+					<option value='1'>1</option>
+					<option value='2'>2</option>
+					<option value='3' selected>3</option>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+			</select></span>
+			<span>Target Distance Grading: <select onchange="Rockets_SetFitness_DistanceScale(this);">
+					<option value='0'>0</option>
+					<option value='1' selected>1</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+					<option value='4'>4</option>
+					<option value='5'>5</option>
+			</select></span>
+			<span>Target Hit Grading: <select onchange="Rockets_SetFitness_HitTargetScale(this);">
+					<option value='0'>0</option>
+					<option value='1'>1</option>
+					<option value='2'>2</option>
+					<option value='3'>3</option>
+					<option value='4'>4</option>
+					<option value='5' selected>5</option>
+			</select></span>
+			<span>Maze: <select onchange="Rockets_SetMaze(this);">
+					<option value='0' selected>Easy</option>
+					<option value='1'>Hard</option>
+			</select></span>
+			<input type='button' value='Reset' onclick='Rockets_Reset();'/>
+		</div>
 	    <p><span class='wendy'>ROCKETS!</span> is genetic algorythm example in which rockets are controlled by heriditary instructions.  Successful <span class='wendy'>ROCKETS!</span> are more likely to breed the next generation of <span class='wendy'>ROCKETS!</span></p>
     </div>
     <script type="text/javascript">
         var main = new Main();
+        main.Run();
     </script>
 </body>
 </html>
