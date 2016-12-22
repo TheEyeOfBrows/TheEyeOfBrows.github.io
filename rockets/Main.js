@@ -15,7 +15,7 @@ function Main() {
 
     this.Setup = function () {
         this.target = { pos: new Vector2D((this.canvas.width / 2) - 25, 25), width: 25, height: 25 };
-        this.fitnessGrading = new FitnessGrading(this.target.pos, 2, 3, 5);
+        this.fitnessGrading = new FitnessGrading(this.target.pos, 1, 3, 5);
         this.obstacles = [];
         this.obstacles.push({ pos: new Vector2D((this.canvas.width / 2) - 150, (this.canvas.height / 2) - 10), width: 300, height: 20 });
         //this.obstacles.push({ pos: new Vector2D(0, (this.canvas.height * 0.25) - 10), width: this.canvas.width * 0.75, height: 20 });
