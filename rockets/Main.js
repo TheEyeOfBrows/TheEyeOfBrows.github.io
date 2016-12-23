@@ -15,6 +15,7 @@ function Main() {
     this.obstacleSet = 0;
 
     this.fitnessGrading;
+    this.physics = new PhysicsPayload();
 
     this.Setup = function () {
         this.target = { pos: new Vector2D((this.canvas.width / 2) - 25, 25), width: 25, height: 25 };
@@ -40,13 +41,17 @@ function Main() {
                 width: (Math.random() * this.canvas.width * 0.5) + 40, 
                 height: (Math.random() * this.canvas.height * 0.25) + 30 });
         }
+        if(this.obstacleSet == 3)
+        {
+            // No obstacles
+        }
         this.runCount = 0;
         this.runMax = 300;
 
         this.rockets = [];
         for(var i = 0; i < 150; i++)
         {
-            this.rockets.push(new Rocket(new Vector2D(this.canvas.width / 2, this.canvas.height), null, this.fitnessGrading));
+            this.rockets.push(new Rocket(this.physics, new Vector2D(this.canvas.width / 2, this.canvas.height), null, this.fitnessGrading));
         }
 
         this.pool = new Pool();
@@ -67,14 +72,8 @@ function Main() {
         if (this.runCount++ >= this.runMax)
         {
             this.runCount = 0;
-            this.rockets = this.pool.BreedCandidates(new Vector2D(this.canvas.width / 2, this.canvas.height), this.target.pos, this.rockets, this.fitnessGrading);
+            this.rockets = this.pool.BreedCandidates(this.physics, new Vector2D(this.canvas.width / 2, this.canvas.height), this.target.pos, this.rockets, this.fitnessGrading);
             this.round++;
-            /*
-            this.rockets = [];
-            for (var i = 0; i < 50; i++) {
-                this.rockets.push(new Rocket(new Vector2D(this.canvas.width / 2, this.canvas.height)));
-            }
-            */
         }
 
         this.context.strokeStyle = '#FFF';
@@ -130,7 +129,4 @@ function Main() {
             this.isRunning = true;
         }
     }
-
 }
-
-//var main = new Main();

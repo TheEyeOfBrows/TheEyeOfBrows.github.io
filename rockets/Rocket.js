@@ -1,15 +1,13 @@
-﻿function Rocket(pos, dna, grading)
+﻿function Rocket(physics, pos, dna, grading)
 {
     this.pos = pos ? new Vector2D(pos.x, pos.y) : new Vector2D();
     this.vector = new Vector2D();
     this.size = 10;
     this.heading = Math.PI * 1.5;
-    this.gravity = 1.1;
-    this.thrust = 2.5;
-    this.handling = 0.14;
     this.alive = true;
     this.aliveTime = 0;
     this.hitTarget = false;
+    this.physics = physics
 
     this.posHistory = [];
     this.grading = grading ? grading : new FitnessGrading();
@@ -65,9 +63,9 @@
         if (!this.alive) return;
         if (!collisionRects) collisionRects = [];
 
-        this.heading += mapRange(this.dna.next(), 0, 1, -this.handling, this.handling);
-        this.vector.addForce(this.thrust, this.heading);
-        this.vector.add(new Vector2D(0, this.gravity));
+        this.heading += mapRange(this.dna.next(), 0, 1, -this.physics.handling, this.physics.handling);
+        this.vector.addForce(this.physics.thrust, this.heading);
+        this.vector.add(new Vector2D(0, this.physics.gravity));
         this.vector.x *= 0.9;
         this.vector.y *= 0.9;
         this.pos.add(this.vector);
@@ -169,4 +167,11 @@ function FitnessGrading(targetPos, distanceScale, aliveTimeScale,hitTargetScale)
     this.distanceScale = distanceScale ? distanceScale : 1;
     this.aliveTimeScale = aliveTimeScale ? aliveTimeScale : 1;
     this.hitTargetScale = hitTargetScale ? hitTargetScale : 1;
+}
+
+function PhysicsPayload(gravity, thrust, handling)
+{
+    this.gravity = gravity ? gravity : 1.1;
+    this.thrust = thrust ? thrust : 2.5;
+    this.handling = handling ? handling : 0.14;
 }

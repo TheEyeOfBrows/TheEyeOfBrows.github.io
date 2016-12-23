@@ -1,10 +1,10 @@
 body{background-color:black; color:white;}
 .wendy{font-family: 'Wendy One', sans-serif;}
-canvas{display: block;}
+canvas{display: block;outline: 1px solid white;padding: 1px;}
 p{width:100%;}
-.container{width:800px;text-align: center;}
-.controls{margin:5px 0; padding:0 5px; display: flex; justify-content: space-between;}
-
+.container{width:800px;text-align: center;margin: 0 auto;}
+.controls{margin:10px 0; padding:0 5px; display: flex; justify-content: space-between;}
+.controls + .controls{margin-top:15px;}
 .controls input{
     background-color: black;
     border: none;
@@ -22,3 +22,8 @@ p{width:100%;}
 }
 .controls select:hover{outline: 1px solid white;}
 .controls select:focus{outline: none;}
+
+.controls input[type="number"] {
+   width:50px;
+   text-align: center;
+}

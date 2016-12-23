@@ -13,7 +13,7 @@
         return theMax;
     }
 
-    this.BreedCandidates = function(initPos, targetPos, candidatesArray, grading)
+    this.BreedCandidates = function(physics, initPos, targetPos, candidatesArray, grading)
     {
         var maxFitness = this.MaxFitness(targetPos, candidatesArray);
         var newPool = [];
@@ -51,7 +51,7 @@
                     }
                 }
             }
-            var newRocket = new Rocket(initPos, newDna, grading);
+            var newRocket = new Rocket(physics, initPos, newDna, grading);
             newRocket.id = "ROCKET " + i;
             newPool.push(newRocket);
         }
