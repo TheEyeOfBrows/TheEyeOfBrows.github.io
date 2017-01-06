@@ -54,3 +54,7 @@ function Rockets_Reset()
 	main.fitnessGrading = fitness;
 	main.Update();
 }
+function Rockets_SkipGenerations()
+{
+	main.SkipGenerations(30);
+}

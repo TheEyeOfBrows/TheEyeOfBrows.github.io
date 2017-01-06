@@ -11,7 +11,7 @@
 
     this.posHistory = [];
     this.grading = grading ? grading : new FitnessGrading();
-    
+
 
     this.dna = dna ? new DNA(dna.sequence) : new DNA();
 
@@ -43,7 +43,7 @@
         ctx.setTransform(1, 0, 0, 1, this.pos.x, this.pos.y);
         ctx.rotate(this.heading);
         ctx.beginPath();
-        
+
         ctx.strokeStyle = this.hitTarget ? '#0F0' : this.alive ? '#FFF' : '#F00';
 
         ctx.moveTo(this.size / 2, 0);
@@ -52,12 +52,12 @@
         ctx.closePath();
         ctx.stroke();
 
-        
+
     }
 
     this.Update = function(target, collisionRects)
     {
-        this.posHistory.push(new Vector2D(this.pos.x, this.pos.y));
+        if (!this.hitTarget) this.posHistory.push(new Vector2D(this.pos.x, this.pos.y));
         if (!this.hitTarget && this.posHistory.length > 30) this.posHistory.shift();
 
         if (!this.alive) return;
@@ -78,7 +78,7 @@
 
         for(var i = 0; i < collisionRects.length && this.alive; i++)
         {
-            if(this.pos.x > collisionRects[i].pos.x && 
+            if(this.pos.x > collisionRects[i].pos.x &&
                 this.pos.x < collisionRects[i].pos.x + collisionRects[i].width &&
                 this.pos.y > collisionRects[i].pos.y &&
                 this.pos.y < collisionRects[i].pos.y + collisionRects[i].height)
@@ -88,7 +88,7 @@
             }
         }
 
-        if(this.pos.x > target.pos.x && 
+        if(this.pos.x > target.pos.x &&
                 this.pos.x < target.pos.x + target.width &&
                 this.pos.y > target.pos.y &&
                 this.pos.y < target.pos.y + target.height)
@@ -96,7 +96,7 @@
             this.alive = false;
             this.hitTarget = true;
         }
-        
+
         this.aliveTime++;
     }
 
@@ -112,7 +112,7 @@
         {
             fitness += mapRange(this.aliveTime, 0, 300, 0, this.grading.aliveTimeScale);
         }
-        
+
         fitness += mapRange(this.pos.distance(this.grading.targetPos), 0, 600, this.grading.distanceScale, 0);
 
         fitness = fitness * 10;

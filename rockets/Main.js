@@ -32,13 +32,13 @@ function Main() {
         }
         if(this.obstacleSet == 2)
         {
-            this.obstacles.push({ 
-                pos: new Vector2D(Math.random() * this.canvas.width, Math.random() * this.canvas.height * 0.6), 
-                width: (Math.random() * this.canvas.width * 0.5) + 40, 
+            this.obstacles.push({
+                pos: new Vector2D(Math.random() * this.canvas.width, Math.random() * this.canvas.height * 0.6),
+                width: (Math.random() * this.canvas.width * 0.5) + 40,
                 height: (Math.random() * this.canvas.height * 0.25) + 30 });
-            this.obstacles.push({ 
-                pos: new Vector2D(Math.random() * this.canvas.width, Math.random() * this.canvas.height * 0.6), 
-                width: (Math.random() * this.canvas.width * 0.5) + 40, 
+            this.obstacles.push({
+                pos: new Vector2D(Math.random() * this.canvas.width, Math.random() * this.canvas.height * 0.6),
+                width: (Math.random() * this.canvas.width * 0.5) + 40,
                 height: (Math.random() * this.canvas.height * 0.25) + 30 });
         }
         if(this.obstacleSet == 3)
@@ -55,19 +55,13 @@ function Main() {
         }
 
         this.pool = new Pool();
-        
+
         this.round = 1;
     }
 
-    this.Update = function () {
+    this.Update = function (shouldDraw = true) {
 
         var breakRound = true;
-        this.context.setTransform(1, 0, 0, 1, 0, 0);
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        this.context.fillStyle = '#FFF';
-        this.context.fillText("Generation [" + this.round + "]", this.canvas.width - 100, 10);
-        this.context.fillText(this.runCount, this.canvas.width - 100, 20);
 
         if (this.runCount++ >= this.runMax)
         {
@@ -76,19 +70,31 @@ function Main() {
             this.round++;
         }
 
-        this.context.strokeStyle = '#FFF';
-        this.context.strokeRect(this.target.pos.x, this.target.pos.y, this.target.width, this.target.height);
-
-        for (var i = 0; i < this.obstacles.length; i++)
+        if(shouldDraw)
         {
+            this.context.setTransform(1, 0, 0, 1, 0, 0);
+            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+            this.context.fillStyle = '#FFF';
             this.context.strokeStyle = '#FFF';
-            this.context.strokeRect(this.obstacles[i].pos.x, this.obstacles[i].pos.y, this.obstacles[i].width, this.obstacles[i].height);
+            this.context.fillText("Generation [" + this.round + "]", this.canvas.width - 100, 10);
+            this.context.fillText(this.runCount, this.canvas.width - 100, 20);
+
+            this.context.strokeRect(this.target.pos.x, this.target.pos.y, this.target.width, this.target.height);
+
+            for (var i = 0; i < this.obstacles.length; i++)
+            {
+                this.context.strokeRect(this.obstacles[i].pos.x, this.obstacles[i].pos.y, this.obstacles[i].width, this.obstacles[i].height);
+            }
         }
-        
+
 
         for (var i = 0; i < this.rockets.length; i++) {
             this.rockets[i].Update(this.target, this.obstacles);
-            this.rockets[i].Draw(this.context);
+            if(shouldDraw)
+            {
+                this.rockets[i].Draw(this.context);
+            }
 
             if (this.rockets[i].alive)
             {
@@ -127,6 +133,34 @@ function Main() {
         {
             this.loopId = setInterval(this.Update.bind(this), 1000 / 60);
             this.isRunning = true;
+        }
+    }
+
+    this.SkipGenerations = function(skipCount)
+    {
+        if(this.isRunning)
+        {
+            this.isRunning = false;
+            var generationTarget = this.round + skipCount;
+            clearInterval(this.loopId);
+            this.context.save();
+            this.context.setTransform(1, 0, 0, 1, 0, 0);
+            this.context.fillStyle = '#FFF';
+            this.context.textAlign = "center";
+            this.context.font='30px Wendy One';
+            this.context.fillText("SKIPPING TO GENERATION "+generationTarget, this.canvas.width/2, this.canvas.height/2);
+            this.context.strokeStyle = '#000';
+            this.context.strokeText("SKIPPING TO GENERATION "+generationTarget, this.canvas.width/2, this.canvas.height/2);
+
+            setTimeout(function(target){
+                while(this.round < generationTarget)
+                {
+                    this.Update(false);
+                }
+                this.context.restore();
+                this.isRunning = true;
+                this.loopId = setInterval(this.Update.bind(this), 1000 / 60);
+            }.bind(this), 20);
         }
     }
 }
