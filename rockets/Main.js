@@ -16,6 +16,7 @@ function Main() {
 
     this.fitnessGrading;
     this.physics = new PhysicsPayload();
+    this.obsticleDrawer;
 
     this.Setup = function () {
         this.target = { pos: new Vector2D((this.canvas.width / 2) - 25, 25), width: 25, height: 25 };
@@ -70,25 +71,6 @@ function Main() {
             this.round++;
         }
 
-        if(shouldDraw)
-        {
-            this.context.setTransform(1, 0, 0, 1, 0, 0);
-            this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-            this.context.fillStyle = '#FFF';
-            this.context.strokeStyle = '#FFF';
-            this.context.fillText("Generation [" + this.round + "]", this.canvas.width - 100, 10);
-            this.context.fillText(this.runCount, this.canvas.width - 100, 20);
-
-            this.context.strokeRect(this.target.pos.x, this.target.pos.y, this.target.width, this.target.height);
-
-            for (var i = 0; i < this.obstacles.length; i++)
-            {
-                this.context.strokeRect(this.obstacles[i].pos.x, this.obstacles[i].pos.y, this.obstacles[i].width, this.obstacles[i].height);
-            }
-        }
-
-
         for (var i = 0; i < this.rockets.length; i++) {
             this.rockets[i].Update(this.target, this.obstacles);
             if(shouldDraw)
@@ -105,6 +87,31 @@ function Main() {
         {
             this.runCount = this.runMax;
         }
+
+        if(shouldDraw) this.Draw();
+    }
+
+    this.Draw = function()
+    {
+
+        this.context.setTransform(1, 0, 0, 1, 0, 0);
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.context.fillStyle = '#FFF';
+        this.context.strokeStyle = '#FFF';
+        this.context.fillText("Generation [" + this.round + "]", this.canvas.width - 100, 10);
+        this.context.fillText(this.runCount, this.canvas.width - 100, 20);
+
+        this.context.strokeRect(this.target.pos.x, this.target.pos.y, this.target.width, this.target.height);
+
+        for (var i = 0; i < this.obstacles.length; i++)
+        {
+            this.context.strokeRect(this.obstacles[i].pos.x, this.obstacles[i].pos.y, this.obstacles[i].width, this.obstacles[i].height);
+        }
+        for (var i = 0; i < this.rockets.length; i++) {
+            this.rockets[i].Draw(this.context);
+        }
+        this.obsticleDrawer.Draw();
     }
 
     this.InitCanvas = function () {
@@ -114,6 +121,8 @@ function Main() {
         this.canvas.style.backgroundColor = '#000';
 
         this.context = this.canvas.getContext("2d");
+
+        this.obsticleDrawer = new ObsticleDrawer(this);
     }
 
     this.Run = function()
