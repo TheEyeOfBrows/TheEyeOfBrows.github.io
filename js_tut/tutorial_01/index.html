@@ -1,0 +1,207 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>JS Tut</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div id="section_01" class="container"/>
+        <h1>
+            Setting up and Hello World!
+        </h1>
+        <div class="block">
+            <p>
+            First we need to set up an environment for writting and running JavaScript.<br/>
+            I'm choosing GitHub's <strong>Atom</strong>, which is a pretty nice IDE for JavaScript.<br/>
+            Download <strong>Atom</strong> from <a href='https://atom.io/'>atom.io</a>.<br/>
+            </p>
+        </div>
+        <div class="block">
+            <p>
+            We're going to add one non-default package to <strong>Atom</strong>
+            - browser-plus, which adds an internal web browser to atom, specifically
+             with the ability to run live previews of our project.<br/>
+            Once installed, open the <strong>File</strong>, <strong>Settings</strong> menu.
+            In the newly opened tab, select <strong>Install</strong>, search for
+            <strong>browser-plus</strong>, and install it.<br/>
+            Close the settings tab when done.  More on browser-plus later.
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                Now we're going to set up a project.</br>
+                Close all your open tabs in Atom, and open <strong>File</strong>,
+                <strong>Open Folder</strong>. Navigate to where you'd like your
+                project to live and create a new folder there (right-click menu) with
+                the project name (tutorial 1),
+                then select that folder and click on the <strong>Select Folder</strong>
+                button.</br>
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                Right-click the project folder and select <strong>New File</strong>.
+                Name the file <strong>index.html</strong>.
+                <img class="center" src="images/01_New_File.PNG" />
+                <strong>index.html</strong> is a good main page name, because it's used
+                as a default name in all web servers.</br>
+                Open up that new html file and drop in the following text.
+            </p>
+            <code><pre>
+&#x3C;!DOCTYPE HTML&#x3E;
+&#x3C;html&#x3E;
+&#x3C;head&#x3E;
+    &#x3C;script&#x3E;
+    alert('Hello World!');
+    &#x3C;/script&#x3E;
+&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+    A webpage
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</pre></code>
+        </div>
+        <div class="block">
+            <p>
+
+            Now, let's open up the HTML page in the browser-plus browser.<br/>
+            The key combo to open the current file in a new browser tab is <strong>CTRL + ALT + o</strong></br>
+            <br />
+            So what just happened? In the HTML page we just ran, we had a script block
+            run the <code>alert</code> function, which opens a message box with the
+            text "Hello World!". This funciton is run by JavaScript for the client using
+            the page!<br/>
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                Let's break down what's in this HTML file.</br/>
+                <br/>
+                First look at the first line, <code>&#x3C;!DOCTYPE HTML&#x3E;</code>.
+                This HTML element is extra information (meta-data, identified by the exclamation point) for the browser to know
+                how to display the page. That flag lets the browser know we're using HTML5,
+                which gives us access to some newer HTML features like the <code>&#x3C;script&#x3E;</code>
+                shorthand element (older HTML files need to specify what language we're using) along with other
+                features we're not yet taking advantage of.<br/>
+                <br/>
+                Now we have the HTML document definition itself. We start with the root <code>&#x3C;html&#x3E;</code>
+                element, which wraps the entire page. The <code>&#x3C;html&#x3E;</code> element contains two elements, the
+                <code>&#x3C;head&#x3E;</code>, and the <code>&#x3C;body&#x3E;</code>.<br/>
+                <br/>
+                The <code>&#x3C;head&#x3E;</code> is where we define things that aren't content, like the page title,
+                the links to style documents (css), and external script files (javascript).<br/>
+                The <code>&#x3C;body&#x3E;</code> is where we set up the visible content of the page,
+                like text and images.<br/>
+                In our page, a <code>&#x3C;script&#x3E;</code> element written in the <code>&#x3C;head&#x3E;</code>
+                runs that javascript <code>alert</code> function once as the page loads.<br/>
+                In the body of the page, our <code>&#x3C;body&#x3E;</code> simply has the pain text <code>A webpage</code>
+                to show the user.
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                Now let's look at the javascript.<br/>
+                <br/>
+                Inside the <code>&#x3C;script&#x3E;</code> element, we have the line of code <code>alert('Hello World!');</code> .
+                <ul>
+                    <li><code>alert</code> is the name of the function we want to run</li>
+                    <li>The parentheses ALWAYS follows the name of the function we want to run</li>
+                    <li>The parentheses also contains the parameters we want to give to the alert function</li>
+                    <li>We want to use the text <strong>Hello World!</strong> as the parameter</li>
+                    <li>Text needs to be wrapped in either single quotes ' or double quotes "</li>
+                    <li>Single quotes means we DON'T want special characters in our text, and that it should be used as written</li>
+                </ul>
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                To elaborate on that last point, sometimes in text you may want to use two lines of text.
+                The <strong>new-line character</strong> is <code>\n</code>.<br/>
+                <br/>
+                Try changing the <code>&#x3C;script&#x3E;</code> element contents to the following.</br>
+                <code>alert("Line 1\nLine 2");</code><br/>
+                It's important to notice that now we're using the double quotes.<br/>
+                Refresh the page and see how now you get text seperated by a new line.
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                Let's try a slightly different HTML page.<br/>
+                Replace the entire file with the following code.<br/>
+            </p>
+            <code><pre>
+&#x3C;!DOCTYPE HTML&#x3E;
+&#x3C;html&#x3E;
+&#x3C;head&#x3E;
+&#x3C;/head&#x3E;
+&#x3C;body&#x3E;
+    &#x3C;script&#x3E;
+    var newElement = document.createElement('p');
+    newElement.innerText = 'Hello World!';
+    document.body.appendChild(newElement);
+    &#x3C;/script&#x3E;
+&#x3C;/body&#x3E;
+&#x3C;/html&#x3E;</pre></code>
+        </div>
+        <div class="block">
+            <p>
+                Save and refresh the page.<br/>
+                You'll see that instead of popping up the alert message box to display the text,
+                we're writting the text directly to the page! (alert messages, while useful when developing, are the worst thing for users to ever see)<br/>
+                <br/>
+                The new script we wrote does the following:<br/>
+                <br/>
+                First, we create a new HTML element (also known as a DOM element).
+                We use the document object (which represents the entire html page) to create a <strong>p</strong> element (for paragraph).
+                This new element is stored into the <code>var newElement</code> variable, so we can use it in the following lines of code.<br/>
+                <br/>
+                Second, we assign some text to the <code>newElement</code> element's
+                <code>innerText</code> field, so that it has something to show the user.
+                Once again, the text we want to use must be surrounded in quotes.<br/>
+                <br/>
+                Third and finally, we use <code>appendChild</code> to add the new element to the bottom of the document's body element
+                (remember that the html document can only contain a <code>head</code> and a <code>body</code> element).
+                The <code>appendChild</code> function puts the new element in the last position of the
+                <code>body</code> element. Note that for this function, we're passing in a <strong>variable</strong> instead of text, so we don't need to use quotes here.<br/>
+                <br/>
+                One question left is why did we move the script out of the <code>&#x3C;head&#x3E;</code>
+                element and into the <code>&#x3C;body&#x3E;</code> element?<br/>
+                <br/>
+                That's because HTML documents are run <strong>IN ORDER</strong> of what's written,
+                with the head being executed before the body. That means that if the script is
+                executed in the <code>&#x3C;head&#x3E;</code> element, the <code>&#x3C;body&#x3E;</code>
+                element doesn't even exist yet because that's further down the page!<br/>
+                Know that this is true only for the HTML part of the page, not the JavaScript itself.
+                Later on, you'll learn about ways of dealing with this issue.
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                This is a good time to try experimenting.<br/>
+                <br/>
+                In the browser tab, try enabling the lightning-bolt button, which
+                enables <strong>Live Preview</strong>. Live Preview will refresh the
+                browser tab any time the html page is saved, so you can see your changes
+                instantly.<br/>
+                <br/>
+                Try changing the hello world text to instead be a number (without quotes),
+                and try doing math with it before assigning it to the newElement. See the links
+                at the bottom for more info about variables.
+            </p>
+        </div>
+        <div class="block">
+            <p>
+                In the next part, I'll explain how to move the javascript into it's own separate file,
+                and how to import an external JavaScript file to use in your page.<br/>
+                <br/>
+                Some reading material:
+            </p>
+            <ul>
+                <li><a href='http://www.w3schools.com/js/js_variables.asp'>Variables Tutorial</a></li>
+                <li><a href='http://www.w3schools.com/js/js_htmldom.asp'>About the Document Object Model</a></li>
+            </ul>
+        </div>
+        <p>Written 2017-Jan-09</p>
+    </div>
+
+</body>
+</html>
